@@ -58,7 +58,7 @@ export function Register() {
       : setToggleCategoryModal(true);
   }
 
-  function handleRegister(form: FormData) {
+  function handleRegister(form: Partial<FormData>) {
     if (!transactionType) {
       return Alert.alert('Selecione o tipo da transação')
     }
