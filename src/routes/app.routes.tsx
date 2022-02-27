@@ -19,7 +19,7 @@ export function AppRoutes() {
         tabBarLabelPosition: 'beside-icon',
         tabBarActiveTintColor: theme.colors.secondary,
         tabBarInactiveTintColor: theme.colors.text,
-        tabBarStyle: { height: 88 }
+        tabBarStyle: { height: 80 }
       }}
     >
       <Screen 
