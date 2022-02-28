@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VictoryPie } from 'victory-native';
@@ -9,6 +9,7 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useTheme } from 'styled-components';
 import { useFocusEffect } from "@react-navigation/native";
 
+import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { Header } from "../../components/Header";
 import { HistoryCard } from "../../components/HistoryCard";
 import { TransactionCardProps } from "../../components/TransactionCard";
@@ -18,6 +19,7 @@ import {
   Container,
   LoadContainer,
   Content,
+  ChangeChargeDisplayContainer,
   ChartContainer,
   MonthSelect,
   MonthSelectButton,
@@ -38,6 +40,7 @@ export function Resume() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
+  const [toggleDisplay, setToggleDisplay] = useState('negative');
   const theme = useTheme();
 
   function handleDateChange(action: 'next' | 'previous') {
@@ -56,10 +59,10 @@ export function Resume() {
 
     const expenses = formattedResponse
       .filter((expenses: TransactionCardProps) =>
-        expenses.type === 'negative' &&
+        expenses.type === toggleDisplay &&
         new Date(expenses.date).getMonth() === selectedDate.getMonth() &&
         new Date(expenses.date).getFullYear() === selectedDate.getFullYear()
-      );
+    );
 
     const totalExpenses = expenses
       .reduce((accumulator: number, expense: TransactionCardProps) => {
@@ -100,9 +103,16 @@ export function Resume() {
     setIsLoading(false);
   }
 
+  function handleToggleDisplay() {
+    if (toggleDisplay === 'positive') {
+      return setToggleDisplay('negative');
+    }
+    setToggleDisplay('positive');
+  }
+
   useFocusEffect(useCallback(() => {
     loadData();
-  }, [selectedDate]));
+  }, [selectedDate, toggleDisplay]));
 
   return (
     <Container>
@@ -139,6 +149,22 @@ export function Resume() {
                 <MonthSelectIcon name='chevron-right' />
               </MonthSelectButton>
             </MonthSelect>
+
+            <ChangeChargeDisplayContainer>
+              <TransactionTypeButton
+                type="up"
+                title="Income"
+                onPress={() => handleToggleDisplay()}
+                isActive={toggleDisplay === 'positive'}
+              />
+
+              <TransactionTypeButton
+                type="down"
+                title="Expenses"
+                onPress={() => handleToggleDisplay()}
+                isActive={toggleDisplay === 'negative'}
+              />
+            </ChangeChargeDisplayContainer>
 
             <ChartContainer>
               <VictoryPie
