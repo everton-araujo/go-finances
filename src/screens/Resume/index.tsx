@@ -14,6 +14,7 @@ import { Header } from "../../components/Header";
 import { HistoryCard } from "../../components/HistoryCard";
 import { TransactionCardProps } from "../../components/TransactionCard";
 import { categories } from "../../utils/categories";
+import { useAuth } from "../../hooks/auth";
 
 import {
   Container,
@@ -42,6 +43,7 @@ export function Resume() {
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
   const [toggleDisplay, setToggleDisplay] = useState('negative');
   const theme = useTheme();
+  const { user } = useAuth();
 
   function handleDateChange(action: 'next' | 'previous') {
     if (action === 'next') {
@@ -53,7 +55,7 @@ export function Resume() {
 
   async function loadData() {
     setIsLoading(true);
-    const dataKey = '@gofinances:transactions';
+    const dataKey = `@gofinances:transactions_user:${user.id}`;
     const response = await AsyncStorage.getItem(dataKey);
     const formattedResponse = response ? JSON.parse(response) : [];
 
