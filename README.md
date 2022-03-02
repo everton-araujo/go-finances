@@ -38,7 +38,7 @@ Google credentials are needed to login on the app. You can learn more about expo
 
 ### TODO
 
-* [] Record the app functionalities and make a gif with it; 
+* [✔] Record the app functionalities and make a gif with it; 
 * [] Create tests;
 * [] Add another authentication method;
 * [] Export the data to excel;
