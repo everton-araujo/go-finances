@@ -6,8 +6,8 @@ All the data is saved on the device using AsyncStorage.
 <p align="center">
 <img 
   src="./assets/app-demo.gif" alt="Demonstration from application"
-  width="300"
-  height="650"
+  width="200"
+  height="450"
 >
 </p>
 
