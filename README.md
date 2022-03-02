@@ -3,7 +3,13 @@
 Gofinances is an app used to control personal finances that uses google credentials to authenticate. 
 All the data is saved on the device using AsyncStorage.
 
-*TODO - app gif goes here*
+<p align="center">
+<img 
+  src="./assets/app-demo.gif" alt="Demonstration from application"
+  width="300"
+  height="650"
+>
+</p>
 
 ### Built With
 
