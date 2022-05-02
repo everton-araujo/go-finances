@@ -42,6 +42,6 @@ Google credentials are needed to login on the app. You can learn more about expo
 * [] Create tests;
 * [] Add another authentication method;
 * [] Export the data to excel;
-* [] Safe the data on a database;
+* [] Store the data on a database;
 
 [⬆ Voltar ao topo](#GoFinances)<br>
